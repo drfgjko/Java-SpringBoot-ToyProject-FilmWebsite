@@ -1,0 +1,13 @@
+body{
+    background-color:#2b1055 ; /* 设置背景色 */
+}
+
+/*整个页面(不含导航栏)*/
+.index_page {
+    /*导航栏的高度 + 一点合适的距离*/
+    margin-top: 100px;
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* 子元素水平居中 */
+    background: url("../images/stars.png");
+}

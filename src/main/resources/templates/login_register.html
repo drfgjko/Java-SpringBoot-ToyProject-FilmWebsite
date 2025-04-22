@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="UTF-8">
+<head>
+    <meta charset="UTF-8">
+    <!-- 识别  $ 符号   -->
+    <script src="/js/jquery-1.4.2.js"></script>
+    <script src="https://unpkg.com/boxicons@2.1.4/dist/boxicons.js"></script>
+    <script type="text/javascript" src="/js/login_register.js"></script>
+    <link rel="stylesheet" href="/css/login_register.css">
+
+    <title>login_register</title>
+</head>
+
+<body>
+        <div class="background"></div>
+
+        <div class="container">
+            <div class="content">
+                <!--左,item的子元素是均匀垂直分布-->
+                <div class="item">
+                    <h2 class="logo">
+                        <box-icon name='film' color='#ffffff' size='lg' ></box-icon>
+                        视界穿梭
+                    </h2>
+                    <div class="text-item">
+                        <h1>视界穿梭：</h1>
+                        <br>
+                        <span>
+                        <h2>畅游电影世界的窗口</h2>
+                    </span>
+                        <p>
+                            一个充满无限可能的电影之门。<br>
+                            在这里, 您将踏上一场充满奇妙和惊喜的电影之旅。<br>
+                            无论您是喜欢悬疑、动作、爱情，
+                            还是冒险，我们都为您准备了丰富多彩的电影资源。
+                        </p>
+                    </div>
+                </div>
+
+                <!--右-->
+                <div class="login-section">
+
+                    <div class="form-box login">
+
+                        <form action="" id="loginForm" autocomplete="off">
+                            <h2>欢迎使用视界穿梭</h2>
+                            <div class="input-box">
+                            <span class="icon">
+                                <box-icon name='envelope' size='md' color='#FFFFFF' ></box-icon>
+                            </span>
+                                <input type="text" required name="email_login" value="aa@163.com"/>
+                                <label >邮箱</label>
+                            </div>
+                            <div class="input-box">
+                        <span class="icon">
+                            <box-icon name='lock' type='solid' size='md' color='#FFFFFF' ></box-icon>
+                        </span>
+                                <input type="password" required name="password_login" value="123" autocomplete="current-password"/>
+                                <label>密码</label>
+                            </div>
+                            <button class="btn" type="submit">登录</button>
+                            <div class="create-account">
+                                <p>创建新用户? <a href="#" class="register-link">注册</a></p>
+                                <a href="/index" style="color: white;">返回</a>
+                            </div>
+                        </form>
+
+                    </div>
+
+                    <!--右隐藏-->
+                    <div class="form-box register">
+
+                        <form action="" id="registerForm" autocomplete="off">
+                            <h2>创建新用户</h2>
+                            <div class="input-box">
+                            <span class="icon">
+                                <box-icon name='envelope' size='md' color='#FFFFFF' ></box-icon>
+                            </span>
+                                <input type="text" required name="email" value="xx@163.com"/>
+                                <label >邮箱</label>
+                            </div>
+                            <div class="input-box">
+                            <span class="icon">
+                                <box-icon name='user-pin' type='solid' size='md' color='#FFFFFF'></box-icon>
+                            </span>
+                                <input type="text" required name="username" value="xx" autocomplete="username"/>
+                                <label >用户名</label>
+                            </div>
+                            <div class="input-box">
+                            <span class="icon">
+                                <box-icon name='lock' type='solid' size='md' color='#FFFFFF'></box-icon>
+                            </span>
+                                <input type="password" required name="passw1" autocomplete="new-password">
+                                <label>密码</label>
+                            </div>
+                            <div class="input-box">
+                            <span class="icon">
+                                <box-icon name='lock' type='solid' size='md' color='#FFFFFF'></box-icon>
+                            </span>
+                                <input type="password" required  name="passw2" autocomplete="new-password">
+                                <label>确认密码</label>
+                            </div>
+                            <button class="btn" type="submit" name="s">注册</button>
+                            <div class="create-account">
+                                <p>已经拥有了账号? <a href="#" class="login-link">登录</a></p>
+                                <a href="/index" style="color: white;">返回</a>
+                            </div>
+                        </form>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+        </div>
+
+    </div>
+
+
+    <script>
+        const loginsec=document.querySelector('.login-section')
+        const loginlink=document.querySelector('.login-link')
+        const registerlink=document.querySelector('.register-link')
+        registerlink.addEventListener('click',()=>{
+            loginsec.classList.add('active')
+        })
+        loginlink.addEventListener('click',()=>{
+            loginsec.classList.remove('active')
+        })
+    </script>
+</body>
+
+</html>

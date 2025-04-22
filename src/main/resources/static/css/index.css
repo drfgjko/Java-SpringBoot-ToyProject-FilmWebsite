@@ -1,0 +1,86 @@
+.index_page {
+    /* 取消上边距 navbar的height=70px*/
+    /* 设置背景色 */
+    height: 1600px;
+    background-color: #100C2A;
+    display: flex;
+    flex-direction: column;
+}
+
+/* 图文容器 */
+.image-text-container {
+    width: 100%;
+    height: 600px;
+    overflow: hidden;
+    position: relative;
+    /*border: white 1px solid;*/
+}
+
+/* 图文 */
+.image-text-wrapper {
+    position: absolute;
+    left: 0;
+    top: 13%;
+    width: 100%;
+    height: 90%;
+    opacity: 0;
+    transform: translateX(-100%);
+    transition: opacity 1s ease-in-out, transform 2s ease-in-out;
+    overflow: hidden;
+    /*border: white 2px solid;*/
+}
+
+.image-text-wrapper.current {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+.image-text-wrapper img{
+    width: 100%;
+    height: 580px;
+    /* border-radius: 30px;		 */
+    transform: translateY(-5%); /* 初始位置 */
+    animation: bounce 5s infinite; /* 应用动画 */
+    border-radius: 20px;
+}
+
+.dots{
+    position: absolute;
+    top: 75%;
+    left: 45%;
+}
+.dot {
+    width: 10px;
+    height: 10px;
+    background-color: #999999;
+    border-radius: 50%;
+    display: inline-block;
+    margin: 0 10px;
+}
+.dot.current {
+    background-color: #fff;
+}
+
+
+/* 右箭头 */
+#changeBtn{
+    background-color: rgba(17,17,17,0);
+    border: 1px white solid;
+    border-radius: 100%;
+    width: 40px;
+    height: 40px;
+    /* color: rgb(2, 38, 192); */
+    font-size: 18px;
+    font-weight: bold;
+    letter-spacing: 2px;
+    cursor: pointer;
+    position: absolute;
+    top: 40%;
+    left: 90%;
+}
+#changeBtn:hover{
+    /* border: 1px white solid; */
+    /* box-shadow: 1px 1px 5px 5px white; */
+    transform: translateY(4px);
+    transition: 0.5s;
+}

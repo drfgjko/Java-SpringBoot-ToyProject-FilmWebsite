@@ -1,0 +1,48 @@
+<!--排行榜-->
+<!DOCTYPE HTML>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-type" content="text/html; charset=UTF-8" />
+    <link href="/css/filmList.css" rel="stylesheet" type="text/css">
+    <script src="/js/jquery-1.4.2.js"></script>
+    <style>
+        a{
+            color: #FFFFFF;
+        }
+    </style>
+</head>
+<style>
+    /* 样式可以根据需求进行调整 */
+    .horizontal-list {
+        list-style-type: none;
+        padding: 0;
+        margin: 0;
+        display: flex;
+    }
+    .horizontal-list li {
+        margin-right: 10px;
+    }
+    .horizontal-list li:last-child {
+        margin-right: 0;
+    }
+</style>
+<body style="margin: 0">
+
+<div id="top" th:insert="navbar.html"></div>
+
+<!--用于垫高-->
+<div id="carousel" style="height: 150px;background-color:#100C2A"></div>
+
+<!--整个内容页-->
+<div class="index-page" style="background-color: #100C2A">
+
+</div>
+<div id="barchart" th:insert="barchart.html"></div>
+<div id="bottom" style="color: white;text-align: center;background-color: #100C2A">Copyright ©2024, shijiechuansuoFilm.com, All Rights Reserved 粤华师备 20132003040号 粤ICP备 123456号</div>
+
+</div>
+
+
+
+</body>
+</html>

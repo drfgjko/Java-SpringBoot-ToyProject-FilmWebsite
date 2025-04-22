@@ -1,0 +1,104 @@
+body {
+    background: #001534;
+    margin: 0; /* 去除 body 默认的 margin */
+    padding: 0; /* 去除 body 默认的 padding */
+}
+
+.index_page {
+    position: relative;
+    height: 100vh;
+    background: url('../images/background2.png');
+    display: flex;
+    justify-content: center; /* 水平居中 */
+    align-items: center; /* 垂直居中 */
+}
+
+.container {
+    position: relative;
+    width:80%; /* 宽度占父容器的 80%（16:9 宽高比） */
+    height: 80%;
+    /*background-color: #2b1055;*/
+    display: flex;
+    justify-content: center; /* 水平居中 */
+    align-items: center; /* 垂直居中 */
+    margin-top: 50px;
+}
+
+.container .false_show {
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* 水平居中 */
+    height: auto;
+    width: auto;
+    /*background-color: #5FA623;*/
+
+    /* 绝对定位，相对于.container定位 */
+    position: absolute;
+    top: 50%; /* 垂直居中 */
+    left: 50%; /* 水平居中 */
+    transform: translate(-50%, -50%); /* 使用负边距将元素居中 */
+    padding: 20px 20px;
+}
+
+.false_show a {
+    text-decoration: none;
+    color: inherit;
+}
+
+.false_show p {
+    color: white;
+    font-size: 20px;
+    font-weight: bold;
+    text-align: center; /* 文本居中 */
+    margin-bottom: 100px;
+}
+
+.false_show #back_btn {
+    text-decoration: none;
+    display: inline-block;
+    padding: 8px 30px;
+    border-radius: 40px;
+    background: #fff;
+    color: #2b1055;
+    font-size: 1.5em;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.5s ease;
+}
+
+.false_show #back_btn:hover{
+    font-weight: bold;
+}
+
+.false_show #link_btn{
+     color: white;
+     font-weight: bold;
+     text-decoration: underline;
+     border: none;
+     background: none;
+     font-size: 20px;
+ }
+
+/*可播放的情况*/
+.container .true_show {
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* 水平居中 */
+    justify-content: center; /* 垂直居中 */
+
+    /* 绝对定位，相对于.container定位 */
+    position: absolute;
+    top: 50%; /* 垂直居中 */
+    left: 50%; /* 水平居中 */
+    transform: translate(-50%, -50%); /* 使用负边距将元素居中 */
+    width: 100%; /* 宽度占父容器的 80% */
+    height: 100%; /* 高度占父容器的 80% */
+    padding: 15px 15px;
+    border: 2px white solid;
+    border-radius: 20px;
+}
+
+.true_show iframe{
+    width: 100%;
+    height: 100%;
+}

@@ -1,0 +1,112 @@
+<!--排行榜-->
+<!DOCTYPE HTML>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-type" content="text/html; charset=UTF-8" />
+    <link href="/css/filmList.css" rel="stylesheet" type="text/css">
+    <script src="/js/jquery-1.4.2.js"></script>
+    <style>
+        a{
+            color: #FFFFFF;
+        }
+    </style>
+</head>
+<style>
+    /* 样式可以根据需求进行调整 */
+    .horizontal-list {
+        list-style-type: none;
+        padding: 0;
+        margin: 0;
+        display: flex;
+    }
+    .horizontal-list li {
+        margin-right: 10px;
+    }
+    .horizontal-list li:last-child {
+        margin-right: 0;
+    }
+</style>
+<body style="margin: 0">
+
+<div id="top" th:insert="navbar.html"></div>
+
+<!--用于垫高-->
+<div id="carousel" style="height: 150px;background-color:#100C2A"></div>
+
+<!--整个内容页-->
+<div class="index-page" style="background-color: #100C2A">
+    <div style="display: flex; flex-direction: column;align-content: center">
+
+        <div id="content" style="text-align: center;display: flex;
+    flex-direction: column;
+    align-items: center;">
+
+            <div>
+                <div id="btns">
+                    <a href="/rank?rankType=1">全部排行</a>
+                    <a href="/rank?rankType=2">本周排行</a>
+                    <a href="/rank?rankType=3">本月排行</a>
+                    <a href="/rank?rankType=4">好评排行</a>
+                    <a href="/rank/print">打印电影播放榜单</a>
+                </div>
+            </div>
+
+            <div id="prod_content">
+                <div th:each="film,rankNo:${filmlist}" class="prod_div" style="background-color: #FFFFFF">
+
+                    <a th:href="'/index/filmdetail?filmid='+${film.filmid}">
+                        <img th:src="@{'/picture/'+${film.picture}}" border="0"/>
+                    </a>
+                    <div class="prod_info"style="width: 620px;margin-left: 25px">
+                        <div class="prod_fname" th:text="'影片名称：'+${film.fname}"></div>
+                        <div th:text="'类型：'+${film.fclass}+' 地区：'+${film.farea}"></div>
+                        <div th:text="'总观看次数：'+${film.playbackvolume}+' 评分：'+${film.score}"></div>
+                        <div class="prod_name" th:text="'导演：'+${film.director}"></div>
+                        <div class="prod_performer" th:text="'参演：'+${film.performer}"></div>
+                        <div th:text="'简介：'+${film.introduction}" ></div>
+
+                    </div>
+                    <div id="rankdetail">
+                        <div id="rank" class="prod_rank" th:text="${rankNo.index + 1 + (currentPage - 1) *pageSize}"></div>
+                        <div id="prod_vip_div" th:if="${film.playpermissions==1}" style="color: black;background-color: gold;text-align: center" >VIP专享</div>
+                        <div id="prod_novip_div" th:if="${film.playpermissions==0}" style="color: white;background-color:#065bff;text-align: center" >免费</div>
+                        <div id="gotocart_div">
+                            <a th:href="'/index/video?filmid='+${film.filmid}" style="color: black">点击观看</a></div>
+                    </div>
+                </div>
+            </div>
+
+            <!--分页超链接 -->
+
+            <div style="clear: both">
+                <br/><br/>
+                <span><a th:href="@{/rank(rankType=${rankType},pageNo=1)}">首页</a></span>&nbsp;&nbsp;
+                <span th:switch="${currentPage}">
+                        <a th:case="1" th:href="@{/rank(rankType=${rankType},pageNo=1)}">上一页</a>&nbsp;&nbsp;
+                        <a  th:case="*" th:href="@{/rank(rankType=${rankType},pageNo=${currentPage - 1})}">上一页</a>
+                </span>
+
+                <span th:if="${currentPage}==${pageCount}">
+                    <a th:href="@{/rank(rankType=${rankType},pageNo=${pageCount})}">下一页</a>&nbsp;&nbsp;
+                </span>
+                <span th:unless="${currentPage}==${pageCount}">
+                    <a th:href="@{/rank(rankType=${rankType},pageNo=${currentPage + 1})}">下一页</a>
+                </span>
+
+                <span>&nbsp;&nbsp;<a th:href="@{/rank(rankType=${rankType},pageNo=${pageCount})}">尾页</a></span>
+                <br/><br/>
+            </div>
+
+        </div>
+    </div>
+
+</div>
+<div id="barchart" th:insert="barchart.html"></div>
+<div id="bottom" style="color: white;text-align: center;background-color: #100C2A">Copyright ©2024, shijiechuansuoFilm.com, All Rights Reserved 粤华师备 20132003040号 粤ICP备 123456号</div>
+
+</div>
+
+
+
+</body>
+</html>

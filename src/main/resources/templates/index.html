@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta http-equiv="Content-type" content="text/html; charset=UTF-8" />
+	<link href="/css/prodList.css" rel="stylesheet" type="text/css">
+	<link href="/css/index.css" rel="stylesheet" type="text/css">
+	<script src="/js/jquery-1.4.2.js"></script>
+	<title>index</title>
+	<style>
+		a{
+			color: #FFFFFF;
+		}
+	</style>
+</head>
+<body>
+
+	<div id="top" th:insert="navbar.html"></div>
+	<!--整个页面-->
+	<div class="index_page">
+
+		<div id="carousel" style="background-color:black;margin-bottom: 30px;">
+			<div class="image-text-container">
+				<div class="image-text-wrapper current">
+					<img src="/images/1.jpg">
+				</div>
+
+				<div class="image-text-wrapper">
+					<img src="/images/2.jpg" >
+				</div>
+
+				<div class="image-text-wrapper">
+					<img src="/images/3.jpg">
+				</div>
+			</div>
+			<div class="dots">
+				<div class="dot current"></div>
+				<div class="dot"></div>
+				<div class="dot"></div>
+			</div>
+			<button id="changeBtn"><img src="/images/右箭头.png" width="20px" height="20px"></button>
+		</div>
+
+		<div id="content">
+
+			<div id="search_div" style="text-align: center">
+				<form method="post" action="/index">
+					<span class="input_span">影片名：<input type="text" name="fname"/></span>
+					<span class="input_span">影片类型：
+					<select name="fclass">
+					<Option value="">不限</option>
+						<option th:each="fclass:${fclasses}" th:value="${fclass}" th:text="${fclass}"></option>
+					</select>
+					</span>
+					<span class="input_span">影片地区：
+					<select name="farea">
+					<Option value="">不限</option>
+						<option th:each="farea:${fareas}" th:value="${farea}" th:text="${farea}"></option>
+					</select>
+					</span>
+					<span class="input_span">搜索（导演、主演）：<input type="text" name="fperformer"/></span>
+					<input type="submit" style="color: #2a2730" value="查 询">
+				</form>
+			</div>
+
+
+			<div id="prod_content" style="margin-left: 8px;">
+				<div th:each="film:${filmlist}">
+					<div class="prod_div" style="background-color:#2a466f">
+						<a th:href="'/index/filmdetail?filmid='+${film.filmid}"><img th:src="@{'/picture/'+${film.picture}}" alt="film_picture"/>
+						</a>
+
+						<div id="prod_name_div" th:text="${film.farea}+' | '+${film.fclass}+' | '+${film.director}"></div>
+						<div id="prod_per_div" th:text="${film.performer}"style="text-align: center"></div>
+						<div id="prod_vip_div" th:if="${film.playpermissions==1}">VIP专享</div>
+						<div id="prod_novip_div" th:if="${film.playpermissions==0}">免费</div>
+						<div id="prod_price_div" th:text="${film.fname}" style="color: #ff8b00"></div>
+						<div>
+							<div id="gotocart_div">
+								<a th:href="'/index/video?filmid='+${film.filmid}"style="color: #FFFFFF">观看</a></div>
+							<div id="say_div" th:text="${film.playbackvolume} + '次观看'"></div>
+						</div>
+					</div>
+				</div>
+
+				<!--分页超链接 -->
+				<div style="clear: both;text-align: center">
+					<br/><br/>
+					<span><a th:href="@{/index(pageNo=1,fname=${fname},fclass=${fclass},farea=${farea},fperformer=${fperformer})}">首页</a></span>&nbsp;&nbsp;
+					<span th:switch="${currentPage}">
+						<a th:case="1" th:href="@{/index(pageNo=${currentPage},fname=${fname},fclass=${fclass},farea=${farea},fperformer=${fperformer})}">上一页</a>&nbsp;&nbsp;
+						<a  th:case="*" th:href="@{/index(pageNo=${currentPage - 1},fname=${fname},fclass=${fclass},farea=${farea},fperformer=${fperformer})}">上一页</a>
+					</span>
+
+					<span th:if="${currentPage}==${pageCount}">
+					<a th:href="@{/index(pageNo=${pageCount},fname=${fname},fclass=${fclass},farea=${farea},fperformer=${fperformer})}">下一页</a>&nbsp;&nbsp;
+				</span>
+					<span th:unless="${currentPage}==${pageCount}">
+					<a th:href="@{/index(pageNo=${currentPage + 1},fname=${fname},fclass=${fclass},farea=${farea},fperformer=${fperformer})}">下一页</a>
+				</span>
+
+					<span>&nbsp;&nbsp;<a th:href="@{/index(pageNo=${pageCount},fname=${fname},fclass=${fclass},farea=${farea},fperformer=${fperformer})}">尾页</a></span>
+					<br/><br/>
+				</div>
+			</div>
+
+		</div>
+
+
+		<div id="bottom" th:insert="bottom.html"></div>
+
+
+</div>
+
+</body>
+<script>
+	function changeImage(element, imageName) {
+		var img = element.getElementsByTagName('img')[0];
+		img.src = `static/images/${imageName}active.png`;
+	}
+	function restoreImage(element, imageName) {
+		var img = element.getElementsByTagName('img')[0];
+		img.src = `static/images/${imageName}.png`;
+	}
+
+	var interval = 5000;
+	var timerId; // 用于存储自动轮播的计时器ID
+	var wrapper = document.querySelector('.image-text-container');
+	var dots = document.querySelectorAll('.dot');
+	function nextSlide() {
+		var currentWrapper = document.querySelector('.image-text-wrapper.current');
+		var nextWrapper;
+		var currentDot = document.querySelector('.dot.current');
+		var nextDot;
+
+		if (currentWrapper.nextElementSibling) {
+			nextWrapper = currentWrapper.nextElementSibling;
+			nextDot = currentDot.nextElementSibling;
+		} else {
+			nextWrapper = document.querySelector('.image-text-wrapper');
+			nextDot = document.querySelector('.dot');
+		}
+		currentWrapper.classList.remove('current');
+		nextWrapper.classList.add('current');
+		currentWrapper.style.transform = 'translateX(-100%)';
+		currentWrapper.style.opacity = '0';
+		nextWrapper.style.transform = 'translateX(0)';
+		nextWrapper.style.opacity = '1';
+		currentDot.classList.remove('current');
+		nextDot.classList.add('current');
+	}
+
+	function autoSlide() {
+		nextSlide();
+		timerId = setTimeout(autoSlide, interval);
+	}
+
+	// 启动自动轮播
+	timerId = setTimeout(autoSlide, interval);
+	// 添加按钮点击事件
+	document.getElementById('changeBtn').addEventListener('click', function() {
+		clearTimeout(timerId); // 清除自动轮播计时器
+		nextSlide();
+		timerId = setTimeout(autoSlide, interval); // 重新启动自动轮播
+	});
+	// 添加图文容器悬浮事件
+	wrapper.addEventListener('mouseenter', function() {
+		clearTimeout(timerId); // 清除自动轮播计时器
+	});
+	wrapper.addEventListener('mouseleave', function() {
+		timerId = setTimeout(autoSlide, interval); // 重新启动自动轮播
+	});
+</script>
+
+</html>

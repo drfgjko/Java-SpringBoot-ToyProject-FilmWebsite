@@ -1,0 +1,170 @@
+
+.film_container{
+    height: 750px;
+    width: 80%;
+    display: flex;
+    justify-content: space-between; /* 水平分布 */
+    padding: 20px 20px;
+    border: 5px white solid;
+    border-radius: 10px;
+    background-color: rgba(128, 128, 128, 0.1);
+    background-image: url('../images/stars.png');
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+}
+
+/*左侧*/
+.film_item {
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between; /* 垂直均匀分布 */
+    align-items: center; /* 水平居中 */
+    padding: 20px 5px;
+}
+
+/*左侧子元素*/
+.film_item .film_pic {
+    width: 100%;
+    height: 80%;
+    display: flex;
+    justify-content: center; /* 水平居中 */
+    align-items: center; /* 垂直居中 */
+}
+
+.film_pic img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain; /* 图片在容器中居中显示，并保持原始比例 */
+}
+
+
+.film_item .btns{
+    width: 100%;
+    display: flex;
+    justify-content: space-between; /* 水平分布 */
+}
+
+/* a 的class叫icon-link*/
+.icon-link {
+    text-decoration: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    background: transparent;
+    /*上、右、下、左*/
+    padding: 0 10px 0 10px;
+    overflow: hidden;
+    /* 设置透明边框 */
+    border: 3px solid transparent;
+    /* 添加过渡效果 */
+    transition: border-color 0.3s;
+    border-radius: 20px;
+}
+
+.icon-link:hover {
+    border-color: white; /* 鼠标悬停时改变边框颜色 */
+}
+
+/*放了icon+p*/
+.icon-link .content {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.icon-link .content > * {
+    margin: 0 10px;
+}
+
+.icon-link p {
+    font-size: 18px;
+}
+
+.film_item .share{
+    /*跟上方pic一样宽*/
+    width: 80%;
+}
+
+
+.film_item .share {
+    display: flex;
+    justify-content: center; /* 水平居中 */
+    align-items: center; /* 垂直居中 */
+}
+
+.share p {
+    font-size: 16px;
+    color: white;
+    margin-right: 10px; /* 右边距 */
+}
+
+.share .social_media {
+    display: flex;
+    justify-content: center; /* 水平居中 */
+    align-items: center; /* 垂直居中 */
+}
+
+.share .social_media box-icon {
+    margin: 0 5px; /* 图标间的水平间距 */
+}
+
+/*右侧*/
+.film_info {
+    width: 50%;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-content: space-between; /* 垂直均匀间隔分布 */
+}
+
+/*右侧的子元素*/
+.film_info .title {
+    height: 100px;
+
+    font-size: 25px;
+    font-weight: bold;
+    border: 2px white solid;
+    text-align: center;
+    border-radius: 10px;
+
+    /* 使用 flex 布局 */
+    display: flex;
+    justify-content: center; /* 水平居中 */
+    align-items: center; /* 垂直居中 */
+}
+
+
+.film_info .text {
+    height: 600px;
+
+    border: 2px white solid;
+    text-align: center;
+    border-radius: 10px;
+
+    display: flex;
+    flex-direction: column; /* 垂直排列 */
+    justify-content: space-between; /* 垂直均匀分布 */
+    padding: 5px 20px;
+}
+
+.text .film_detail {
+    height: auto;
+    display: flex;
+    align-items: center; /* 垂直居中 */
+}
+
+.film_detail h2 {
+    font-size: 20px;
+    margin-right: 10px; /* 右边距 */
+    white-space: nowrap; /* 防止文本换行 */
+}
+
+.film_detail p {
+    font-size: 16px;
+    text-align: left;
+}

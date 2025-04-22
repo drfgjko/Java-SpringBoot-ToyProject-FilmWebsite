@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="UTF-8">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="/css/upgradetovip.css">
+    <title>to be VIP</title>
+</head>
+<body>
+
+<div class="index_page" style="display: flex; justify-content: center;">
+    <div class="background"></div>
+    <div class="container">
+        <!-- class为fill的div是用来占行的，因为整个container是justify-content: space-between;  垂直均匀间隔分布   -->
+        <div class="fill"></div>
+        <h1>升级为VIP</h1>
+
+        <p>作为VIP会员,您将享受以下特权:</p>
+        <ul>
+            <li>
+                <strong style="color: white">独家内容：</strong>
+                每月可观看独家高清电影、电视剧和纪录片。
+            </li>
+            <li>
+                <strong style="color: white">无广告体验：</strong>
+                在观影过程中，您将不再被任何广告打扰。
+            </li>
+            <li>
+                <strong style="color: white">高清画质：</strong>
+                所有视频内容支持高清和超清播放，让观影更加舒适。
+            </li>
+            <li>
+                <strong style="color: white">多设备支持：</strong>
+                可在手机、平板、电视和电脑上同步观看，方便灵活。
+            </li>
+            <li>
+                <strong style="color: white">优先观看：</strong>
+                VIP会员将优先观看最新上映的影片和电视剧。
+            </li>
+            <li>
+                <strong style="color: white">会员专享活动：</strong>
+                定期举办会员专享活动，包括抽奖、赠品和见面会等。
+            </li>
+            <li>
+                <strong style="color: white">会员客服：</strong>
+                享有VIP客服优先接待权,解决问题更快捷。
+            </li>
+        </ul>
+
+        <button class="upgrade-button" onclick="goToPayment()">立即升级</button>
+        <a href="/index" style="color: white;font-size: 16px" >返回</a>
+        <div class="fill"></div>
+    </div>
+
+
+</div>
+
+
+<script th:inline="javascript">
+    var memberId = /*[[${memberId}]]*/ null;
+    function goToPayment() {
+        // 这里可以替换为实际的支付页面链接
+        // 生成一个基于时间戳的唯一标识符
+
+        const traceNo = Date.now().toString();
+        const upgradeUrl = `http://localhost:8090/alipay/pay?subject=tovip&traceNo=${traceNo}&totalAmount=9.99&memberId=${memberId}`;
+        console.log("Member ID is: " + memberId);
+        window.location.href = upgradeUrl;
+    }
+</script>
+
+</body>
+</html>

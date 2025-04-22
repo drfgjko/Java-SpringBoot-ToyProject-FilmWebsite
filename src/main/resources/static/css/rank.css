@@ -1,0 +1,10 @@
+
+.index_page {
+    /*导航栏高度+舒服一些的高度*/
+    margin-top: 100px;
+    display: flex;
+    justify-content: center; /* 水平居中 */
+    align-items: center; /* 垂直居中 */
+    height: 100vh; /* 使用视口高度作为高度 */
+    background:  #100C2A;
+}

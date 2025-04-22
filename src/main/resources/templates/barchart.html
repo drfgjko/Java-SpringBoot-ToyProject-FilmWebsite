@@ -1,0 +1,176 @@
+<!-- 引入echarts.js -->
+<script src="https://cdn.jsdelivr.net/npm/echarts/dist/echarts.min.js"></script>
+<link rel="stylesheet" href="/css/barchart.css">
+
+</head>
+<body>
+
+<div class="index_page">
+    <div class="charts" style="display: grid;grid-template-columns: 1fr 1fr; /* 两列，每列平均分配剩余空间 */
+            grid-template-rows: 1fr 1fr;grid-gap: 20px;">
+        <div id="movieTypeChart" style="width: 600px;height:400px;"></div>
+
+        <div id="filmYearChart" style="width: 600px;height:400px;"></div>
+
+        <div id="scatter-chart" style="width: 600px; height: 400px;"></div>
+
+        <div id="movieRegionChart" style="width: 600px;height:400px;"></div>
+    </div>
+</div>
+
+
+
+
+<script th:inline="javascript">
+  // 获取后端传递的数据
+  /*<![CDATA[*/
+  var movieTypes = /*[[${movieTypes}]]*/ [];
+  var typeCounts = /*[[${typeCounts}]]*/ [];
+  /*]]>*/
+  // console.log("++++++++++"+movieTypes);
+  var movieRegions = /*[[(${movieRegions})]]*/ [];
+  var regionCounts = /*[[(${regionCounts})]]*/ [];
+
+  var movieYears = /*[[(${movieYears})]]*/ [];
+  var yearCounts = /*[[(${yearCounts})]]*/ [];
+  // console.log("++++++++++"+movieYears);
+  // console.log("++++++++++"+yearCounts);
+
+  var moviescores = /*[[(${moviescores})]]*/ [];
+  var scoreCounts = /*[[(${scoreCounts})]]*/ [];
+
+
+  // 绘制柱状图
+  var typeChart = echarts.init(document.getElementById('movieTypeChart'),'dark');
+  var typeOption = {
+    title: {
+      text: '影片类型分布'
+    },
+      tooltip: {
+          trigger: 'axis'
+      },
+    xAxis: {
+      type: 'category',
+      data: movieTypes
+    },
+    yAxis: {
+        type: 'value',
+        name: '影片数量',
+    },
+    series: [{
+      data: typeCounts,
+      type: 'bar'
+    }]
+  };
+  typeChart.setOption(typeOption);
+
+  // 绘制饼图
+  var regionChart = echarts.init(document.getElementById('movieRegionChart'),'dark');
+  var regionOption = {
+    title: {
+      text: '影片地区分布',
+      left: 'center'
+    },
+      tooltip: {  // 添加tooltip
+          trigger: 'item',  // 触发方式，鼠标悬停显示
+          formatter: '{b}: {c} ({d}%)'  // tooltip格式，{a}代表系列名称，{b}代表数据项名称，{c}代表数值，{d}%代表百分比
+      },
+    series: [
+      {
+        name: '影片地区',
+        type: 'pie',
+        radius: '50%',
+          data: movieRegions.map(function (name, index) {
+              return {
+                  value: regionCounts[index],
+                  name: name,
+                  label: {
+                      formatter: '{b}: {d}%'
+                  }
+              }
+          }),
+        emphasis: {
+          itemStyle: {
+            shadowBlur: 10,
+            shadowOffsetX: 0,
+            shadowColor: 'rgba(0, 0, 0, 0.5)'
+          }
+        }
+      }
+    ]
+  };
+  regionChart.setOption(regionOption);
+
+//绘制折线图
+  // 初始化ECharts图表
+  var yearChart = echarts.init(document.getElementById('filmYearChart'),'dark');
+
+  // 指定图表的配置项和数据
+  var yearOption = {
+      title: {
+          text: '影片上映年份分布'
+      },
+      tooltip: {
+          trigger: 'axis'
+      },
+      xAxis: {
+          type: 'category',
+          data: movieYears
+      },
+      yAxis: {
+          type: 'value',
+          name: '影片数量',
+      },
+      series: [{
+          name: '影片数量',
+          type: 'line',
+          data: yearCounts
+      }]
+  };
+
+  // 使用刚指定的配置项和数据显示图表。
+  yearChart.setOption(yearOption);
+
+
+//散点图
+  // 基于准备好的dom，初始化echarts实例
+  var myChart = echarts.init(document.getElementById('scatter-chart'),'dark');
+
+  // 创建一个数组来存储评分和数量数据
+  var data = [];
+  for (var i = 0; i < moviescores.length; i++) {
+      data.push([moviescores[i], scoreCounts[i]]);
+  }
+  // 指定图表的配置项和数据
+  var option = {
+      title: {
+          text: '影片评分分布散点图'
+      },
+      xAxis: {
+          type: 'category',
+          name: '评分'
+      },
+      yAxis: {
+          type: 'value',
+          name: '影片数量',
+      },
+      tooltip: { // 配置 tooltip
+          trigger: 'axis',
+          formatter: function(params) {
+              return '评分：' + params[0].data[0] + '<br/>数量：' + params[0].data[1];
+          }
+      },
+      series: [{
+          symbolSize: 10, // 调整散点大小
+          data: data,
+          type: 'scatter'
+      }]
+  };
+
+  // 使用刚指定的配置项和数据显示图表。
+  myChart.setOption(option);
+
+
+
+</script>
+

@@ -1,0 +1,39 @@
+<!DOCTYPE HTML>
+<html lang="zh-cn" xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="/css/filmevaluate.css" rel="stylesheet" type="text/css">
+    <title>evaluate</title>
+</head>
+
+<body>
+    <div th:insert="navbar.html"></div>>
+    <div class="index_page" style="display: flex; justify-content: center;">
+        <div class="background"></div>
+        <div class="container">
+            <form action="/evaluate/doEvaluate" method="post" name="f">
+            <!--        以下一行代码用于在Url请求中添加filmid参数-->
+                <input type="hidden" th:name="filmid" th:value="${film.filmid}" />
+                <div class="left_item">
+                    <h1 class="film_name" th:text="${film.fname}">1900</h1>
+                    <div class="film_pic">
+                        <img class="film_pic" th:src="'/picture/'+${film.picture}" alt="fiml_pic">
+                    </div>
+                </div>
+
+                <div class="right_item">
+                    <div class="comment">
+                        <p>评论影片</p>
+                        <!--   textarea会读取空格-->
+                        <textarea th:name="'pjcontent'" placeholder="Brevity is the soul of wit,&#10;but we need your comment to have text in it.&#10;简洁是智慧的灵魂，&#10;但我们需要您的评论中有文字。"></textarea>
+                        <button type="submit" name="s" value="评论">评论</button>
+                        <a href="/index" >返回</a>
+                    </div>
+                </div>
+            </form>
+        </div>
+
+    </div>
+</body>
+</html>

@@ -1,0 +1,189 @@
+/* 页面内容 */
+body{
+    background-color: #001534;
+}
+
+.index_page{
+    height: 100vh; /* 将高度设置为视口高度 */
+    width: auto;
+}
+
+.background {
+    width: 100vw;
+    height: 100vh;
+    background-image: url('../images/background.png');
+    background-size: 100% 100%; /* 将背景图片拉伸以填满整个背景容器 */
+    background-repeat: no-repeat;
+    filter: blur(5px);
+}
+
+.container {
+    /* 导航栏高度+舒服的高度 */
+    margin-top: 80px;
+    /* 相对子元素 */
+    position: absolute;
+    /* 居中 */
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%,-50%);
+    width: 80%;
+    height: 700px;
+    background-color: rgba(128, 128, 128, 0.3);
+    border-radius: 20px;
+    overflow: hidden;
+    border: 5px white solid;
+}
+
+
+.left_item{
+    /* 相对container */
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 40%;
+    height: 100%;
+    color: #fff;
+    display: flex;
+    flex-direction: column;
+    justify-content: center; /* 垂直居中 */
+    align-items: center; /* 水平居中 */
+    text-align: center; /* 如果需要文本居中 */
+    padding: 10px 30px;
+}
+
+.film_name{
+    margin: 0 0 20px;
+}
+
+.film_pic {
+    width: 80%;
+    height:80%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.film_pic img {
+    border-radius: 30px;
+    width: 100%;
+    height: 100%;
+    object-fit: contain; /* 保持原比例并填充容器 */
+}
+
+
+/* 右部 */
+.container .right_item{
+    position: absolute;
+    top: 0;
+    right: 0;
+    /* 右值越大范围越小 */
+    width: calc(100% - 40%);
+    height: 100%;
+    color: #fff;
+}
+
+.right_item .comment{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    /* 调返回键 */
+    position: relative; 
+}
+
+.right_item .comment p {
+    text-align: center;
+    font-size: 30px;
+    margin-bottom: 30px;
+     /* 调整标题与文本框之间的间距 */
+     font-weight: bold;
+}
+
+.right_item .comment textarea::placeholder {
+    margin-left: -4px;
+    color: #999 !important; 
+    font-style: italic !important;
+    font-size: 18px !important;
+}
+
+
+.right_item .comment textarea {
+    color: #2b1055;
+    width: 70%;
+    height: 40%;
+    margin-bottom: 20px;
+
+    border: none;
+    outline: none;
+    resize: none; /* 禁止调整大小 */
+    padding: 10px;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+
+.comment button {
+    display: inline-block;
+    padding: 8px 30px;
+    border-radius: 40px;
+    background-color: transparent;
+    color: white;
+    font-size: 1.5em;
+    border: 2px white solid;
+    cursor: pointer;
+    transition: background-color 0.5s ease;
+}
+
+.comment button:hover {
+    color: #2b1055;
+    font-weight: bold;
+    background: #fff;
+}
+
+
+.comment a {
+    text-decoration: none;
+    width: auto;
+    padding: 10px 40px;
+    font-size: 20px;
+    font-weight: bold;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    position: absolute; /* 使用绝对定位 */
+    bottom: 10px; /* 距离底部 10px */
+    right: 10px; /* 距离右侧 10px */
+    z-index: 1;
+    overflow: hidden;
+    display: flex;
+    justify-content: center; /* 水平居中 */
+    align-items: center; /* 垂直居中 */
+}
+
+.comment a::before,
+.comment a::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    transition: opacity 0.5s ease;
+    pointer-events: none;
+}
+
+.comment a::before {
+    background-color: rgba(255, 255, 255, 0.1);
+    z-index: -1;
+}
+
+.comment a::after {
+    background: linear-gradient(rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.3));
+    z-index: -2;
+    opacity: 0;
+}
+
+.comment a:hover::after {
+    opacity: 1;
+}

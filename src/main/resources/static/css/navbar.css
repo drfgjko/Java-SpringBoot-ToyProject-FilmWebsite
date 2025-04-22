@@ -1,0 +1,202 @@
+
+
+/*整一条导航栏*/
+.top{
+    position: fixed;
+    /* header_height = 30+20+20 = 70px */
+    height: 30px;/* 设置固定高度 */
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    /* 上下 20px，左右 30px 的内边距 */
+    padding: 20px 30px;
+    justify-content: space-between; /* 让子元素在 header 内均匀分布 */
+    background-image: url('../images/stars.png'); /* 设置背景图 */
+    background-size: cover; /* 背景图尺寸覆盖整个header */
+    box-shadow: 0 .5rem 1rem rgba(36, 16, 92, 0.1);
+}
+
+
+/* logo 和 logo 图片 */
+.logo_info{
+    height:70px;
+    width: auto;
+    display: flex;
+    /* background-color: red; */
+}
+
+.logo_pic{
+    /* 是logo_info的height->70px */
+    height: 100%;
+}
+
+.logo_text{
+    color: #FFFFFF;
+    font-size: 24px;
+    text-decoration: none;
+    display: flex;
+    justify-content: center; /* 将内容水平居中 */
+    align-items: center; /* 将内容垂直居中 */
+}
+
+
+/* 导航链接 */
+.navbar_choices {
+    display: flex; /* 使用 flex 布局 */
+}
+
+.navbar_choices a {
+    font-size: 1rem;
+    text-decoration: none;
+    /* padding是内部的 */
+    padding: 2rem;
+    color: #ffffff;
+     /* 做伪元素需要 */
+    position: relative;
+}
+
+.navbar_choices a:hover {
+    color: #05B0FE; 
+    font-weight: bold;
+}
+
+/* 为链接下方添加悬停时的线条 */
+.navbar_choices a::after {
+    content: ''; /* 用于插入伪元素 */
+    /* 相对父元素：-> .navbar_choices */
+    position: absolute; 
+    bottom: 0; /* 使线条位于链接下方 */
+    left: 0;
+    width: 0; 
+    height: 2px; /* 线条高度 */
+    background-color: #ffffff; /* 线条颜色 */
+    transition: width 0.4s ease; /* 宽度变化的过渡效果 */
+}
+
+/* 链接悬停时线条出现 */
+.navbar_choices a:hover::after {
+    width: 100%; 
+}
+
+
+/* 搜索框 */
+.search-bar{
+    /* 不包括header的padding */
+    height: 100%;
+    border: 3px solid #fff;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+}
+
+.search-bar input{
+    width: 100%;
+    height: 100%;
+    background-color:transparent;
+    border: none;
+    outline: none;
+    color: #fff;
+    font-size: 16px;
+    padding-left: 10px;
+}
+
+.search-bar button{
+    width: 50px;
+    height: 100%;
+    /* background: transparent; */
+    background: #05B0FE;
+    outline: none;
+    border: none;
+    color: #fff;
+    cursor: pointer;
+}
+
+.search-bar input::placeholder{
+    color: #fff;
+}
+
+
+/* 图标 */
+.icons {
+    height: 60px;
+    display: flex;
+    align-items: center; /* 垂直居中 */
+}
+
+.bx-wrapper {
+    padding: 20px;
+    position: relative;
+}
+
+
+.bx {
+    text-decoration: none;
+    color: #FFFFFF;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* icons下方的字 */
+.icons span{
+    font-size: 14px;
+}
+
+/* js调出的隐藏div里的样式设置 */
+.dialog {
+    position: absolute;
+    transform: translateX(-50%);
+    top: 110%;
+    width:150px;
+    height:auto;
+    color: #FFFFFF;
+    background-color: #1C0522;
+    background-image: url('../images/stars.png');
+    background-size: cover;
+    padding: 10px 10px;
+    border-radius: 5px;
+    text-align: center;
+    display: none;
+}
+
+/* 伪元素做三角 */
+.dialog::before {
+    content: '';
+    position: absolute;
+    top: -10px;
+    left: 85%;
+    transform: translateX(-50%);
+    border-width: 0 10px 10px 10px;
+    border-style: solid;
+    border-color: transparent transparent #1C0522 transparent;
+}
+
+.dialog_text,
+.dialog_btn {
+    margin-bottom: 20px;
+}
+
+.dialog_btn p {
+    margin: 0; /* 清除段落的默认外边距 */
+}
+
+.dialog_btn a {
+    text-decoration: none;
+    display: inline-block; /* 将链接显示为块级元素 */
+    background-color: #05B0FE;
+    color: white;
+    font-weight: bold;
+    border: none;
+    padding: 8px 16px;
+    cursor: pointer;
+    border-radius: 3px;
+    margin-top: 20px;
+}
+
+.dialog_btn a:hover {
+    color: #001534;
+    background-color: #0086DE;
+}

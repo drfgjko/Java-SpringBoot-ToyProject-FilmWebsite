@@ -1,0 +1,87 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "poppins",sans-serif;
+}
+
+.index_page{
+    height: 100vh; /* 将高度设置为视口高度 */
+    width: auto;
+    /*导航栏间距*/
+    background-color: #001534;
+}
+
+.background{
+    /* 要求很大 */
+    width: 100vw;
+    height: 100vh;
+    /* 外围模糊 */
+    filter: blur(10px);
+    background: url("../images/background.png");
+    background-size:cover ;
+    position: fixed; /* 将背景固定在视口中 */
+    top: 0;
+    left: 0;
+}
+
+/* container包括item跟section  */
+.container {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: 40%;
+    height: 80%;
+    background: url('../images/background.png') no-repeat center;
+    background-size: cover;
+    border-radius: 20px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between; /* 垂直均匀间隔分布 */
+    align-items: center; /* 水平居中 */
+}
+
+p{
+    margin-bottom: 25px;
+}
+
+h1 {
+    color: black;
+    margin-bottom: 20px;
+}
+
+ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+li {
+    margin-bottom: 10px;
+    font-size: 16px;
+}
+
+.upgrade-button {
+    text-decoration: none;
+    display: inline-block;
+    padding: 8px 30px;
+    border-radius: 40px;
+    background: #fff;
+    color: #2b1055;
+    font-size: 1.5em;
+    transition: background-color 0.3s ease;
+  }
+
+.upgrade-button:hover {
+    color: white;
+    background-color: #44285F;
+}
+
+/*返回按钮*/
+.container a{
+    color: white;
+    font-size: 18px;
+    margin-top: 10px; /* 调整上边距 */
+
+}

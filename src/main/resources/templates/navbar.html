@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="UTF-8">
+<head>
+    <meta charset="UTF-8">
+    <!-- 监视页面滚动 -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- font awesome cdn link  -->
+    <script src="https://unpkg.com/boxicons@2.1.4/dist/boxicons.js"></script>
+    <!-- custom css file link  -->
+    <!-- 就是要这样写才能读取到，不用管   -->
+    <link rel="stylesheet" href="/css/navbar.css">
+    <title>navbar</title>
+</head>
+
+<body>
+
+<!--为了更好的适用性，不要装在header里，拿一个div装-->
+<!--不要在css里写*去初始化-->
+<div class="top">
+    <!-- 导航栏 -->
+    <div class="logo_info">
+        <img  class="logo_icon" src="/images/LOGO.png" alt="LOGO">
+        <a href="#" class="logo_text">视界穿梭</a>
+    </div>
+
+    <nav class="navbar_choices">
+        <a href="/index">首页</a>
+        <a href="/rank">排行</a>
+        <a href="/echart">图表</a>
+        <a href="/index">推荐</a>
+        <a href="/index">关于</a>
+    </nav>
+
+
+    <form method="post" action="/index" class="search-bar">
+        <label>
+            <input type="text" name="fperformer" placeholder="搜索..."/>
+        </label>
+        <button type="submit">
+            <box-icon name='search' color='#ffffff' size='sm' ></box-icon>
+        </button>
+    </form>
+
+    <div class="icons">
+        <div class="bx-wrapper">
+            <a href="#" class="bx">
+                <box-icon name='time' type='solid' color='#ffffff' animation='tada-hover' size='sm' ></box-icon>
+                <span>观看历史</span>
+            </a>
+        </div>
+
+        <div class="bx-wrapper" th:if="${session.memberLogin != null}">
+            <a href="#" class="bx">
+                <box-icon name='star' type='solid' color='#ffffff' animation='tada-hover' size='sm' ></box-icon>
+                <span>收藏</span>
+            </a>
+        </div>
+
+        <div class="bx-wrapper" th:if="${session.memberLogin != null}">
+            <a href="#" class="bx">
+                <box-icon name='folder-open' type='solid' color='#ffffff' animation='burst-hover'></box-icon>
+                <span>待看</span>
+            </a>
+        </div>
+
+        <div class="bx-wrapper">
+            <a href="#" class="bx">
+                <box-icon name='globe' color='#ffffff' animation='tada-hover' size='sm' ></box-icon>
+                <span>语言</span>
+            </a>
+        </div>
+
+        <div class="bx-wrapper">
+            <a href="#" class="bx">
+                <box-icon name='film' type='solid' color='#FFFFFF' animation='tada-hover' size='sm' ></box-icon>
+                <span>影片</span>
+            </a>
+        </div>
+
+
+        <div class="bx-wrapper" th:if="${session.memberLogin != null}">
+            <a href="#" class="bx">
+                <box-icon name='cart-add' color='#FFFFFF' animation='tada-hover' size='sm'></box-icon>
+                <span>购买记录</span>
+            </a>
+        </div>
+
+        <div class="bx-wrapper" th:if="${session.memberLogin != null and session.memberLogin.type != 1}">
+            <a href="/admin/toAdminLogin" class="bx">
+                <box-icon name='crown' type='solid' color='#FFFFFF' animation='tada-hover' size='sm'></box-icon>
+                <span>成为会员</span>
+            </a>
+        </div>
+
+        <div class="bx-wrapper" onmouseover="showDialog('loginDialog')" onmouseout="hideDialog('loginDialog')">
+            <a href="#" class="bx">
+                <box-icon name='user' type='solid' color='#FFFFFF' animation='tada-hover' size='sm'></box-icon>
+                <span>我的</span>
+            </a>
+            <div class="dialog" id="loginDialog">
+                <div class="dialog_text">
+                    <p th:if="${session.memberLogin}">
+                        <span th:text="'欢迎回来，' + (${session.memberLogin.type == 1 ? 'VIP用户' : '普通用户'}) + ${session.memberLogin.getMembername()} + '!'"></span>
+                    </p>
+                    <p th:unless="${session.memberLogin}">
+                        <span>欢迎，请登录!</span>
+                    </p>
+                </div>
+                <div class="dialog_btn">
+                    <p th:if="${session.memberLogin}">
+                        <a href="/index/logOut">退出</a>
+                    </p>
+                    <p th:unless="${session.memberLogin}">
+                        <a href="/index/toLogin">登录</a>
+                    </p>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+
+</div>
+
+
+<script>
+// 获取 top 元素
+const topElement = document.querySelector(".top");
+
+// 监听页面滚动事件
+window.addEventListener("scroll", function() {
+    // 获取页面滚动的垂直距离
+    const scrollY = window.scrollY;
+    // 定义页面滚动的最大距离
+    const maxScroll = document.documentElement.scrollHeight - window.innerHeight;
+    // 计算当前滚动位置的透明度，范围从 0 到 1
+    let opacity = scrollY / maxScroll;
+    // 限制透明度的范围在 0 到 1 之间
+    opacity = Math.min(1, Math.max(0, opacity));
+    // 根据透明度设置导航栏的背景色
+    topElement.style.backgroundColor = "rgba(0, 26, 53, " + opacity + ")";
+});
+
+
+function showDialog(dialogId) {document.getElementById(dialogId).style.display = 'block';}
+function hideDialog(dialogId) {document.getElementById(dialogId).style.display = 'none';}
+</script>
+
+
+</body>

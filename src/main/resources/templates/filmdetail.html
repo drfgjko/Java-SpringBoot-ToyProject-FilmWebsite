@@ -1,0 +1,214 @@
+<!DOCTYPE HTML>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta http-equiv="Content-type" content="text/html; charset=UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="/js/jquery-1.4.2.js"></script>
+    <link rel="stylesheet" href="/css/filmdetail.css" >
+    <link rel="stylesheet" href="/css/film_container.css" >
+    <link rel="stylesheet" href="/css/parallax_scrolling.css" >
+    <link rel="stylesheet" href="/css/comment_container.css" >
+    <title>film detail</title>
+</head>
+<body>
+
+    <div id="top" th:insert="navbar.html"/>
+    <!--内容页面-->
+    <div class="index_page">
+
+        <!-- 电影详情信息   带外边框    -->
+        <div class="film_container">
+
+            <div class="film_item">
+                <div class="film_pic">
+                    <img th:src="'/picture/'+${film.picture}" alt="影片图片">
+                </div>
+                <div class="btns">
+                    <!--   占位用    -->
+                    <div class="fill"></div>
+                    <a  class="icon-link" th:href="'/index/video?filmid='+${film.filmid}">
+                        <div class="content">
+                            <box-icon name='play-circle' color='#ffffff' animation='burst-hover'></box-icon>
+                            <span class="text"><p>播放</p></span>
+                        </div>
+                    </a>
+                    <a  class="icon-link" th:href="'/filmdetail/evaluate?filmid='+${film.filmid}">
+                        <div class="content">
+                            <box-icon name='edit' color='#ffffff' ></box-icon>
+                            <span class="text"><p>评论</p></span>
+                        </div>
+                    </a>
+                    <a  class="icon-link" href="#">
+                        <div class="content">
+                            <box-icon name='star' type='solid' color='#ffffff' animation='burst-hover'></box-icon>
+                            <span class="text"><p>收藏</p></span>
+                        </div>
+                    </a>
+                    <a  class="icon-link" href="#">
+                        <div class="content">
+                            <box-icon name='folder-plus' color='#ffffff' animation='burst-hover'></box-icon>
+                            <span class="text"><p>加入待看</p></span>
+                        </div>
+                    </a>
+                    <!--   占位用-->
+                    <div class="fill"></div>
+                </div>
+                <div class="share">
+                    <p>分享:</p>
+                    <div class="social_media">
+                        <!--       页面开发工具会说找不到组件/但是影响不大                -->
+                        <box-icon name='internet-explorer' type='logo' color='#ffffff' size='md'></box-icon>
+                        <box-icon name='telegram' type='logo' color='#ffffff' size='md'></box-icon>
+                        <box-icon name='twitter' type='logo' color='#ffffff' size='md'></box-icon>
+                        <box-icon name='instagram-alt' type='logo' color='#ffffff' size='md'></box-icon>
+                        <box-icon name='facebook-square' type='logo' color='#ffffff' size='md'></box-icon>
+                        <box-icon name='whatsapp-square' type='logo' color='#ffffff' size='md'></box-icon>
+                    </div>
+                </div>
+            </div>
+
+            <div class="film_info">
+                <div class="title">
+                    <span th:text="${film.fname}"></span>
+                </div>
+                <div class="text">
+                    <div class="film_detail">
+                        <h2>类型：</h2>
+                        <p th:text="${film.fclass}"></p>
+                    </div>
+
+                    <div class="film_detail">
+                        <h2>地区：</h2>
+                        <p th:text="${film.farea}"></p>
+                    </div>
+
+                    <div class="film_detail">
+                        <h2>上映年份：</h2>
+                        <p th:text="${film.year}"></p>
+                    </div>
+
+                    <div class="film_detail">
+                        <h2>简介：</h2>
+                        <p th:text="${film.introduction}"></p>
+                    </div>
+
+                    <div class="film_detail">
+                        <h2>参演：</h2>
+                        <p th:text="${film.performer}"></p>
+                    </div>
+
+                    <div class="film_detail">
+                        <h2>导演：</h2>
+                        <p th:text="${film.director}"></p>
+                    </div>
+
+                    <div class="film_detail">
+                        <h2>时长：</h2>
+                        <p th:text="${film.time}"><p>分钟</p></p>
+                    </div>
+
+                    <div class="film_detail">
+                        <h2>评分：</h2>
+                        <p th:text="${film.score}"></p>
+                    </div>
+                </div>
+            <!--  这是film_info(右侧)的div            -->
+            </div>
+
+        <!--     这是film_container的div       -->
+        </div>
+
+        <!--  滚动区      -->
+        <div class="parallax_scrolling">
+            <section>
+                <!--    就是这样写才能读到,别管        -->
+                <img th:src="@{/images/stars.png}" id="stars">
+                <img th:src="@{/images/logo_moon.png}" id="moon">
+                <img th:src="@{/images/mountains_behind.png}" id="mountains_behind">
+<!--                <a th:href="'/filmdetail/evaluate?filmid='+${film.filmid}" id="btn">评论</a>-->
+                <img th:src="@{/images/background2.png}" id="mountains_front">
+            </section>
+        </div>
+
+        <!--  评论区      -->
+        <div class="comment_container">
+            <div class="comment_title">
+                <h1>最新影评</h1>
+            </div>
+            <div class="comment_all">
+                <!--   没有评论的情况        -->
+                <div th:if="${comments.entrySet().isEmpty()}" class="no_comments">
+                    <div class="comment_one">
+                        <div class="comment_pic"></div>
+                        <div class="comment_text">
+                            <div class="name_time">
+                                <div class="name"></div>
+                                <div class="time"></div>
+                            </div>
+                            <div class="comment_content">
+                                <p>当前没有评论可供显示。</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!--评价循环开始-->
+                <div class="comment_one" th:each="entry : ${comments.entrySet()}">
+                    <div class="comment_pic">
+                        <img th:src="@{/images/default_user_icon.jpg}" alt="user_icon">
+                    </div>
+                    <div class="comment_text">
+                        <div class="name_time">
+                            <div class="name">
+                                <p>用户</p>
+                                <p style="font-weight: bold" th:text="${entry.value}"></p>
+                                <p>：</p>
+                            </div>
+                            <div class="time">
+                                <p>评论时间：</p>
+                                <p th:text="${#dates.format(entry.key.pjtime, 'yyyy-MM-dd HH:mm:ss')}"/>
+                            </div>
+                        </div>
+                        <div class="comment_content">
+                            <p th:text="${entry.key.content}"></p>
+                        </div>
+                    </div>
+                 </div>
+            </div>
+
+            <div  id="bottom" th:insert="bottom.html"/>
+        <!--  comment_container          -->
+        </div>
+        <!--    这个div是index_page的    -->
+    </div>
+
+
+    <script>
+        let stars = document.getElementById('stars')
+        let moon = document.getElementById('moon')
+        let mountains_behind = document.getElementById('mountains_behind')
+        let mountains_front = document.getElementById('mountains_front')
+        let isParallaxEnabled = false; // 初始状态下不启用视差效果
+        let flag = 700; // 前一个 div 的高度
+
+        window.addEventListener('scroll', function(){
+            let scrollDistance = window.scrollY;
+
+            // 启用视差效果
+            if (scrollDistance > flag) {
+                isParallaxEnabled = true;
+            }
+            if (isParallaxEnabled) {
+                // 减去前一个 div 的高度
+                let adjustedScrollDistance = scrollDistance - flag;
+                stars.style.left = (adjustedScrollDistance) * 0.25 + 'px';
+                moon.style.top = (adjustedScrollDistance) * 1.05 + 'px';
+                mountains_behind.style.top = (adjustedScrollDistance) * 0.25 + 'px';
+                mountains_front.style.top = 0 + 'px';
+            }
+        });
+
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,219 @@
+body{
+    width: 100%;
+    background: #001534;
+}
+
+.back_line{
+    height: 100px;
+    background-color: #001534;
+}
+
+.background{
+    background: url('../images/background.png') no-repeat center;
+    background-size:cover ;
+    /* 要求很大 */
+    height: 1000px;
+    width: 100%;
+    /* 外围模糊 */
+    filter: blur(10px);
+}
+
+/* container包括item跟section  */
+.container{
+    /* 相对子元素 */
+    position: absolute;
+    /* 居中 */
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%,-50%);
+
+
+    width: 80%;
+    height: 650px;
+    background: url('../images/background.png') no-repeat center;
+    background-size:cover ;
+    border: 2px white solid;
+    border-radius: 20px;
+    overflow: hidden;
+}
+
+.content{
+    width: 100%;
+    height: 100%;
+    position: relative;
+    overflow: hidden;
+}
+
+.item{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 55%;
+    height: 100%;
+    color: #fff;
+    background: transparent;
+
+    padding: 0 0 20px 20px;
+
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+}
+
+.item .logo{
+    width: auto;
+    height: auto;
+
+    color: #fff;
+    font-size: 30px;
+
+    display: flex;
+    align-items: center;
+}
+
+.item .text-item{
+    width: auto;
+    height: auto;
+}
+
+
+.text-item h1{
+    font-size: 30px;
+}
+
+
+.text-item h2{
+    font-size: 40px;
+}
+
+.text-item p{
+    font-size: 16px;
+    margin: 20px 0;
+    line-height: 2;
+}
+
+
+/* 右边 */
+.container .login-section{
+    position: absolute;
+    top: 0;
+    right: 0;
+    /* item的宽度 */
+    /* 右值越大范围越小 */
+    width: calc(100% - 55%);
+    height: 100%;
+    color: #fff;
+    /* 毛玻璃 */
+    backdrop-filter: blur(8px);
+}
+
+.login-section .form-box{
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    
+}
+.login-section .form-box.register{
+    transform: translateX(100%);
+    transition: transform .6s ease;
+    transition-delay: 0s;
+}
+
+.login-section.active .form-box.register{
+    transform: translateX(0);
+    transition-delay: .7s;
+}
+
+.login-section .form-box.login{
+    transform: translateX(0);
+    transition: transform .6s ease;
+    transition-delay: 0.7s;
+}
+
+.login-section.active .form-box.login{
+    transform: translateX(100%);
+    transition-delay: 0s;
+}
+
+
+
+.login-section .form-box h2{
+    text-align: center;
+    font-size: 25px;
+}
+
+.form-box .input-box{
+    width: 340px;
+    height: 50px;
+    border-bottom: 2px solid#fff;
+    margin: 30px 0;
+    position: relative;
+}
+
+.input-box input{
+    /*输入框文字颜色*/
+    color: white;
+    width: 100%;
+    height: 100%;
+    background: transparent;
+    border: none;
+    outline: none;
+    font-size: 16px;
+    padding-right: 28px;
+
+
+}
+
+.input-box label{
+    position: absolute;
+    top: 50%;
+    left: 0;
+    transform: translateY(-50%);
+    font-size: 16px;
+    pointer-events: none;
+    transition: .5s ease;
+
+}
+
+
+.input-box .icon{
+    position: absolute;
+    top: 0;
+    right: 0;
+    font-size: 19px;
+}
+
+/*  */
+.input-box input:focus~ label,
+.input-box input:valid~ label{
+    left: -30%;
+}
+
+.btn{
+    width: 100%;
+    height: 45px;
+    outline: none;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    background: #0A84D9;
+    font-size: 20px;
+    font-weight: bold;
+    color: #fff;
+    box-shadow: rgba(0,0,0,0.4);
+}
+
+.create-account{
+    font-size: 18px;
+    text-align: center;
+    margin: 25px;
+}
+.create-account p a{
+    color: #F06150;
+    font-weight: bold;
+    text-decoration: underline;
+}
+

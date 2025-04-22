@@ -1,0 +1,38 @@
+<!DOCTYPE HTML>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta http-equiv="Content-type" content="text/html; charset=UTF-8" />
+  <link rel="stylesheet" href="/css/vedio.css">
+  <script src="/js/jquery-1.4.2.js"></script>
+  <title>video play</title>
+</head>
+
+<body>
+
+  <div id="top" th:insert="navbar.html"/>
+  <div class="index_page">
+
+    <div class="container">
+
+      <div class="false_show" th:if="${member.type}==0 and ${film.playpermissions}==1" style="text-align: center ;color: #2a2730;">
+        <!--   占行用的div     -->
+        <div class="fill"></div>
+        <div class="item">
+          <p>此影片仅限<a id="link_btn" href="/admin/toAdminLogin">VIP会员</a>观看。</p>
+          <div class="fill"></div>
+          <a id="back_btn" href="/index" >返回</a>
+        </div>
+        <div class="fill"></div>
+      </div>
+
+      <div class="true_show" th:unless="${member.type}==0 and ${film.playpermissions}==1">
+            <iframe th:src="@{'http://player.youku.com/embed/'+${film.filmiink}}" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"></iframe>
+      </div>
+
+    </div>
+
+  </div>
+
+
+</body>
+</html>
