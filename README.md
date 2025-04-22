@@ -45,7 +45,7 @@
 
 ## 技术栈
 
-- **后端**：Spring Boot，使用 Spring MVC 处理请求，Spring Data JPA 进行数据访问。
+- **后端**：Spring Boot，使用 Spring MVC 处理请求，MyBatis-Plus 进行数据访问。
 - **前端**：Thymeleaf 模板引擎用于动态生成 HTML。
 - **数据库**：使用 MySQL 存储电影和用户数据。
 - **安全**：Spring Security 进行用户认证和权限管理。
